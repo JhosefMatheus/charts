@@ -12,13 +12,33 @@ def get_chart_data(request):
 
         body_dict = json.loads(body_request)
 
-        dados = list(Dados.objects.values(body_dict["eixoX"]).order_by(body_dict["eixoX"]).annotate(eixoX=F(body_dict["eixoX"]), eixoY=Sum(body_dict["eixoY"])))
-
-        dict_response = {
-            "dados": dados
+        json_dict = {
+            "linhas": []
         }
 
-        json_response = json.dumps(dict_response).encode()
+        for row in body_dict:
+            linha = {
+                "colunas": []
+            }
+
+            for column in row["colunas"]:
+                eixo_x = column["eixoX"]
+                eixo_y = column["eixoY"]
+                grafico = column["grafico"]
+
+                pesquisa = list(Dados.objects.values(eixo_x).order_by(eixo_x).annotate(eixoX=F(eixo_x), eixoY=Sum(eixo_y)))
+
+                coluna = {
+                    "grafico": grafico,
+                    "eixoX": list(map(lambda dado: dado["eixoX"], pesquisa)),
+                    "eixoY": list(map(lambda dado: dado["eixoY"], pesquisa))
+                }
+
+                linha["colunas"].append(coluna)
+            
+            json_dict["linhas"].append(linha)
+
+        json_response = json.dumps(json_dict).encode()
 
         base64_response = base64.b64encode(json_response).decode()
 

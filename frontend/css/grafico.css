@@ -1,0 +1,39 @@
+:root {
+    --light-blue: rgb(98, 98, 239);
+    --blue: rgb(52, 52, 235);
+    --light-red: rgb(224, 60, 60);
+    --gray: rgba(218, 215, 215, 0.578);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: var(--gray);
+    overflow: auto;
+}
+
+.linha {
+    width: 100%;
+    /* height: 100%; */
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.coluna {
+    width: 100%;
+    height: 100%;
+}
