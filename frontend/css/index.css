@@ -1,0 +1,133 @@
+:root {
+    --light-blue: rgb(98, 98, 239);
+    --blue: rgb(52, 52, 235);
+    --light-red: rgb(224, 60, 60);
+    --gray: rgba(218, 215, 215, 0.578);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray);
+    box-sizing: border-box;
+}
+
+.linhas {
+    flex-grow: 1;
+    margin: 10px;
+    overflow: auto;
+}
+
+.linha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.linha-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid var(--gray);
+}
+
+.linha-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.coluna {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    box-shadow: 5px 5px 5px 5px var(--gray);
+    box-sizing: border-box;
+}
+
+.coluna-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: 1px solid var(--gray);
+}
+
+.coluna-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+.options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.confirm-btn {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    background-color: var(--light-blue);
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.confirm-btn:hover {
+    background-color: var(--blue);
+    transition: 0.2s;
+}
+
+.error-btn {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    background-color: var(--light-red);
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.error-btn:hover {
+    background-color: red;
+    transition: 0.2s;
+}
+
+.seletor-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.seletor-div > select {
+    width: 100%;
+}

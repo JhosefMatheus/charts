@@ -5,28 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
     <div class="content">
-        <select name="eixo-x" id="eixo-x">
-            <option value="nomeFantasia" selected>Nome fantasia</option>
-            <option value="veiculoNome">Veículo nome</option>
-            <option value="linhaNome">Linha nome</option>
-            <option value="motoristaNome">Motorista nome</option>
-            <option value="motoristaMatricula">Motorista matrícula</option>
-            <option value="inercia">Inércia</option>
-            <option value="rpmElevado">RPM elevado</option>
-        </select>
-        <select name="eixo-y" id="eixo-y">
-            <option value="nomeFantasia" selected>Nome fantasia</option>
-            <option value="veiculoNome">Veículo nome</option>
-            <option value="linhaNome">Linha nome</option>
-            <option value="motoristaNome">Motorista nome</option>
-            <option value="motoristaMatricula">Motorista matrícula</option>
-            <option value="inercia">Inércia</option>
-            <option value="rpmElevado">RPM elevado</option>
-        </select>
-        <button id="gerar-grafico">Gerar gráfico</button>
+        <div class="linhas">
+            <div class="linha" id="add-linha-div">
+                <button id="add-linha-btn" class="confirm-btn">Adicionar linha</button>
+            </div>
+        </div>
+        <div class="options">
+            <button id="gerar-grafico" class="confirm-btn">Gerar gráfico</button>
+        </div>
     </div>
     <script src="../js/index.js" type="module"></script>
 </body>
