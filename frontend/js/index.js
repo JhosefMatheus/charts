@@ -127,9 +127,14 @@ function criarColuna() {
     botaoRemoverColuna.innerHTML = "Remover coluna";
     botaoRemoverColuna.addEventListener("click", removerColuna);
 
-    divEixoX.className = "seletor-div";
-    divEixoY.className = "seletor-div";
     divGrafico.className = "seletor-div";
+    divGrafico.setAttribute("dado", "grafico");
+    
+    divEixoX.className = "seletor-div";
+    divEixoX.setAttribute("dado", "eixoX");
+
+    divEixoY.className = "seletor-div";
+    divEixoY.setAttribute("dado", "eixoY");
 
     labelEixoX.innerHTML = "Eixo X:";
     labelEixoY.innerHTML = "Eixo Y:";
@@ -212,33 +217,46 @@ gerarGraficoBotao.addEventListener("click", async () => {
         }
 
         colunas.forEach(coluna => {
-            linhaAtual.colunas.push("Coluna");
+            const colunaContent = coluna.childNodes[1];
+
+            const dadosColunaContent = colunaContent.childNodes;
+
+            const grafico = Array.from(dadosColunaContent).filter(dado => dado.nodeType === Node.ELEMENT_NODE && dado.getAttribute("dado") === "grafico")[0];
+            const eixoX = Array.from(dadosColunaContent).filter(dado => dado.nodeType === Node.ELEMENT_NODE && dado.getAttribute("dado") === "eixoX")[0];
+            const eixoY = Array.from(dadosColunaContent).filter(dado => dado.nodeType === Node.ELEMENT_NODE && dado.getAttribute("dado") === "eixoY")[0];
+
+            const graficoSelect = grafico.lastChild;
+            const eixoXSelect = eixoX.lastChild;
+            const eixoYSelect = eixoY.lastChild;
+
+            const graficoSelectValue = graficoSelect.value;
+            const eixoXSelectValue = eixoXSelect.value;
+            const eixoYSelectValue = eixoYSelect.value;
+
+            const colunaData = {
+                grafico: graficoSelectValue,
+                eixoX: eixoXSelectValue,
+                eixoY: eixoYSelectValue
+            }
+            
+            linhaAtual.colunas.push(colunaData);
         });
 
         linhasColunasJSON.push(linhaAtual);
     });
 
-    console.log(linhasColunasJSON);
-    // const eixoXOpcao = eixoX.value;
-    // const eixoYOpcao = eixoY.value;
+    const gerarGraficoResponse = await fetch(`${urlApi}/getChartData/`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(linhasColunasJSON)
+    });
 
-    // const bodyData = {
-    //     eixoX: eixoXOpcao,
-    //     eixoY: eixoYOpcao
-    // }
+    const gerarGraficoJSON = await gerarGraficoResponse.json();
 
-    // const gerarGraficoResponse = await fetch(`${urlApi}/getChartData/`, {
-    //     method: "POST",
-    //     headers: {
-    //         "Accept": "application/json",
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify(bodyData)
-    // });
+    const base64Response = gerarGraficoJSON.base64;
 
-    // const gerarGraficoJSON = await gerarGraficoResponse.json();
-
-    // const base64Response = gerarGraficoJSON.base64;
-
-    // window.location = `./grafico.html?grafico=${base64Response}`;
+    window.location = `./grafico.html?grafico=${base64Response}`;
 });
